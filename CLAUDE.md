@@ -90,7 +90,9 @@ my-blog/
 - 코드: `ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`
 
 ### 색상과 다크 모드
-- 모든 색상은 `:root`의 CSS 변수로 정의하고, 컴포넌트에서는 변수만 참조합니다(하드코딩 금지).
+- 콘셉트는 **블랙 배경 + 네온**입니다. 다크 모드가 검은 배경에 마젠타·시안·그린 네온 강조색(발광 효과 포함)을 쓰고, 라이트 모드는 같은 팔레트를 흰 배경에서도 WCAG AA를 지키도록 낮춘 톤(보라/시안/그린 700번대)으로 씁니다. 순백 바탕에 네온 그대로를 올리지 않습니다.
+- 모든 색상은 `:root`의 CSS 변수(`--accent`, `--accent-2`, `--accent-3`와 `*-rgb` 짝)로 정의하고, 컴포넌트에서는 변수만 참조합니다(하드코딩 금지).
+- 발광(`text-shadow`/`box-shadow`)은 `--glow-op` 변수(라이트 0, 다크 1)를 `calc()`에 곱해서 다크 모드에서만 보이게 합니다. 예: `text-shadow: 0 0 calc(10px * var(--glow-op)) rgba(var(--accent-2-rgb), var(--glow-op));`
 - 테마 결정 순서:
   1. 사용자가 토글로 선택한 값(`localStorage`의 `theme` 키)
   2. 없으면 시스템 설정(`prefers-color-scheme`)
@@ -98,7 +100,12 @@ my-blog/
 - 깜빡임(FOUC) 방지를 위해 테마 적용 스크립트는 `<head>`에서 CSS보다 먼저, 동기적으로 실행합니다.
 - `localStorage` 접근은 `try/catch`로 감쌉니다(사파리 비공개 모드 등).
 - 헤더에 테마 토글 버튼을 두고 `aria-label`을 제공합니다.
-- 대비율은 WCAG AA(본문 4.5:1) 이상을 유지합니다.
+- 대비율은 WCAG AA(본문 4.5:1) 이상을 유지합니다. 네온 강조색을 새로 추가할 때도 라이트 모드 톤이 흰 배경에서 이 기준을 지키는지 확인합니다.
+- 깜빡이는 애니메이션(헤더 로고의 커서 등)은 `prefers-reduced-motion: reduce`에서 끕니다. 광과민 발작 위험이 있는 빠른 점멸은 쓰지 않습니다.
+
+### 레이아웃
+- 헤더·푸터·글 목록은 넓은 컨테이너(`max-width: 1100px`)를 쓰고, 글 본문·상태 화면(`#app > article`, `#app > .back-link`, `#app > .status`)만 읽기 좋은 폭(`68ch`)으로 다시 좁힙니다.
+- 글 목록은 세로 리스트가 아니라 카드 그리드(`.post-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }`)입니다.
 
 ### 반응형
 - 모바일 우선(mobile-first)으로 작성하고 `min-width` 미디어 쿼리로 확장합니다.
