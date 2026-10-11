@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "hello-world",
+    "title": "블로그를 시작합니다",
+    "date": "2026-10-10",
+    "description": "프레임워크 없이 HTML, CSS, JavaScript만으로 만든 마크다운 블로그의 첫 글입니다.",
+    "tags": ["일상"]
+  },
+  {
+    "slug": "markdown-guide",
+    "title": "마크다운 문법 가이드",
+    "date": "2026-10-11",
+    "description": "이 블로그에서 사용할 수 있는 마크다운 문법을 한눈에 정리했습니다.",
+    "tags": ["가이드", "마크다운"]
+  },
+  {
+    "slug": "today-i-learned",
+    "title": "오늘 배운 것",
+    "date": "2026-10-11",
+    "description": "Claude Code로 블로그를 만들며 배운 HTML, CSS, JavaScript의 역할을 정리했습니다.",
+    "tags": ["회고", "웹 기초"]
+  }
+]
